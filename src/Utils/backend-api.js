@@ -11,9 +11,12 @@ export const getUsers = async () => {
     
 }
 
-export const updateUser = async (user) => {
+export const updateUser = async (id, followers) => {
+    const user = {
+        followers:followers
+    }
     try {
-        const res = await axios.put(`/tweeter-users/:${user.id}`, user);
+        const res = await axios.patch(`/tweeter-users/${id}`, user);
         return res;
     } catch(error) {
         return error;
