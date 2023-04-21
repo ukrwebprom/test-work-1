@@ -18,5 +18,4 @@ export const updateUser = async (user) => {
     } catch(error) {
         return error;
     }
-    console.log(user);
 }
