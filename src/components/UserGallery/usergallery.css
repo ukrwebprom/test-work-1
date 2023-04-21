@@ -1,0 +1,17 @@
+.userlist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 48px;
+  list-style: none;
+}
+
+.wrapper {
+  wudth: 100%;
+  padding: 50px 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=usergallery.css.map */
