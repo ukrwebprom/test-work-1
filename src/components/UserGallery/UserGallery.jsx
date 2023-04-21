@@ -43,6 +43,7 @@ export const UserGallery = () => {
     return(
         <div className="wrapper">
         {loading && <p>Loading</p>} 
+        {isError && <p>Loading error</p>}
         <ul className="userlist">
             {users.map((u, index) => 
                 (index <= showLimit-1) &&
