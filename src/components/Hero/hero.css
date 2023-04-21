@@ -1,0 +1,15 @@
+.hero {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%);
+}
+.hero h1 {
+  color: white;
+  font-size: 20vw;
+  font-weight: 200;
+}
+@media screen and (min-width: 480px) {
+  .hero h1 {
+    font-size: 96px;
+  }
+}/*# sourceMappingURL=hero.css.map */

@@ -20,10 +20,10 @@ export const UserGallery = () => {
         }
     }
 
-    const updateUser = async (user) => {
+    const updateUser = async (u) => {
         try {
-            const res = await backend.updateUser(user);
-            console.log(res);
+            const res = await backend.updateUser(u);
+            setUsers(u => u.map(cur => cur.id === res.data.id ? res.data : cur));
         } catch (error) {
             setIsError(true);
         }
@@ -31,16 +31,15 @@ export const UserGallery = () => {
     const loadMore = () => setShowLimit(l => l + 3);
 
     const followUser = id => {
-        const user = users.find(u => u.id === id)
-        let followers = user.followers;
+        const user = {...users.find(u => u.id === id)}
         if(following.includes(id)) {
-            followers -= 1;
+            user.followers -= 1;
             setFollowing(u => u.filter(f => f !== id ));
         } else {
-            followers += 1;
+            user.followers += 1;
             setFollowing(u => [...u, id]);
         }
-        updateUser(id, followers);
+        updateUser(user)
     }
 
     useEffect(() => {
