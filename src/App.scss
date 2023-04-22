@@ -1,0 +1,38 @@
+.mainBtn {
+    background-color: #EBD8FF;
+    color:white;
+    font-size: 13px;
+    padding:5px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    border:0;
+    text-transform: uppercase;
+    line-height: 26px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &.loading {
+        background-color: #eee !important;
+    }
+
+    &:hover {
+        background-color: #471CA9;
+    }
+}
+.userlist {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:48px;
+    list-style: none;
+    margin-bottom: 50px;
+}
+.wrapper {
+    wudth:100%;
+    padding:50px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

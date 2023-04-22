@@ -1,0 +1,12 @@
+.tweetsheader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #471CA9;
+}
+.tweetsheader h2 {
+  font-size: 32px;
+  font-weight: 200;
+  color: #333;
+}/*# sourceMappingURL=tweetsheader.css.map */
