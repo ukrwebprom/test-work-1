@@ -9,6 +9,7 @@
   text-transform: uppercase;
   line-height: 26px;
   margin-bottom: 15px;
+  box-sizing: content-box;
   cursor: pointer;
 }
 .mainBtn.loading {
