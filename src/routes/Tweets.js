@@ -8,7 +8,7 @@ import Alert from "@mui/material/Alert";
 export const Tweets = () => {
   const Init = useRef(false);
   const TweetFilter = ["Show All", "Follow", "Followings"];
-  const [filter, setFilter] = useState(TweetFilter[0]);
+  const [filter, setFilter] = useState('');
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);

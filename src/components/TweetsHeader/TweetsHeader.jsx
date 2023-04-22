@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -6,8 +6,7 @@ import './tweetsheader.scss';
 import { useState } from "react";
 
 export const TweetsHeader = ({filter, onFilter}) => {
-    const location = useLocation();
-    const [showMode, setShowMode] = useState('Show All')
+    const [showMode, setShowMode] = useState('')
     const handleChange = (e) => {
         setShowMode(e.target.value);
         onFilter(e.target.value);
@@ -21,12 +20,13 @@ export const TweetsHeader = ({filter, onFilter}) => {
           value={showMode}
           onChange={handleChange}
         >
+            <MenuItem value=""><em>None</em></MenuItem>
             {filter.map(f => (
                 <MenuItem value={f} key={f}>{f}</MenuItem>
             ))}
         </Select>
       </FormControl>
-        <Link to={location.state?.from ?? '/'} className="mainBtn">Back</Link>
+        <Link to='/' className="mainBtn">Back</Link>
     </div>
     )
 }
