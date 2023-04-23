@@ -4,14 +4,15 @@ import Coverx2 from "../../Images/card-cover@2x.png";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
 import { useState } from "react";
 import clsx from "clsx";
+import PropTypes from 'prop-types';
 
-export const UserCard = ({user, onFollow, isFollowing}) => {
+export const UserCard = ({ user, onFollow, isFollowing }) => {
   const [following, setFollowing] = useState(isFollowing);
 
-    const handleFollow = () => {
-        onFollow(user.id);
-        setFollowing(f => !f)
-    }
+  const handleFollow = () => {
+    onFollow(user.id);
+    setFollowing((f) => !f);
+  };
 
   return (
     <div className="card">
@@ -42,3 +43,9 @@ export const UserCard = ({user, onFollow, isFollowing}) => {
     </div>
   );
 };
+
+UserCard.propTypes = {
+  user:PropTypes.object,
+  onFollow:PropTypes.func,
+  isFollowing:PropTypes.bool
+}

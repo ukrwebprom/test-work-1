@@ -4,6 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './tweetsheader.scss';
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 export const TweetsHeader = ({onFilter}) => {
     const [showMode, setShowMode] = useState('Show All')
@@ -32,4 +33,8 @@ export const TweetsHeader = ({onFilter}) => {
       </FormControl> 
     </div>
     )
+}
+
+TweetsHeader.propTypes = {
+  onFilter: PropTypes.func
 }
