@@ -1,5 +1,5 @@
 # test-work-1
-This is a test project, made on Career skills. Tech part course.
+This is a test project, made on "Career skills. Tech part" course.
 
 ## Used technologies
 The project is created on React. The initial projet was created with Create React App. \
