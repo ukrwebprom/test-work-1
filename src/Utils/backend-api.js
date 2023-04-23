@@ -1,21 +1,25 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://6429521bebb1476fcc46e108.mockapi.io/';
-const controller = new AbortController();
 
-export const getUsers = async (p) => {
+
+export const getUsers = async (p, n) => {
     try {
-        const users = await axios(`/tweeter-users?page=${p}&limit=3`, {
-            signal: controller.signal
-         });
+        const users = await axios(`/tweeter-users?page=${p}&limit=${n}`);
         return users;
     } catch (err) {
         throw new Error("Loading error");
-    }
-    
+    } 
 }
-export const abortRequest = () => {
-    controller.abort();
+
+export const getAllUsers = async () => {
+    try {
+        const users = await axios('/tweeter-users');
+        return users;
+    } catch (err) {
+        throw new Error("Loading error");
+    } 
 }
+
 
 export const updateUser = async (u) => {
 

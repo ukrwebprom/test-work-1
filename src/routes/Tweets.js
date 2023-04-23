@@ -7,6 +7,7 @@ import Alert from "@mui/material/Alert";
 
 export const Tweets = () => {
   const Init = useRef(false);
+  const Step = 3;
   const TweetFilter = ["Show All", "Follow", "Followings"];
   const [filter, setFilter] = useState('');
   const [users, setUsers] = useState([]);
@@ -18,11 +19,12 @@ export const Tweets = () => {
       ? JSON.parse(localStorage.getItem("following"))
       : []
   );
+  const isFollowing = id => following.includes(id);
 
   const loadUsers = async (p) => {
     try {
-      const res = await backend.getUsers(p);
-      setUsers((current) => [...current, ...res.data]);
+      const res = (filter === '')?  await backend.getUsers(p, Step) : await backend.getAllUsers();
+      setUsers((current) => (filter === '')? [...current, ...res.data] : [...res.data]);
       setLoading(false);
     } catch (error) {
       setIsError(true);
@@ -32,34 +34,41 @@ export const Tweets = () => {
 
   useEffect(() => {
     if (!Init.current) {
+      return () => (Init.current = true);
+    } else {
       setLoading(true);
       loadUsers(page);
-      return () => (Init.current = true);
     }
-  }, [page]);
+  }, [filter, page]);
 
   useEffect(() => {
     localStorage.setItem("following", JSON.stringify(following));
   }, [following]);
 
-  const handleLoadMore = () => {
+/*   const handleLoadMore = () => {
     loadUsers(page + 1);
     setLoading(true);
     setPage((p) => p + 1);
-  };
+  }; */
 
-  const handleFilter = (f) => {
+/*   const handleFilter = (f) => {
     setFilter(f);
-  };
+  }; */
+
+/*   useEffect(() => {
+    if(Init.current) {
+      console.log("djsdb")
+    }
+  }, [filter, page]) */
 
   const filteredTweets = () => {
     let filtered = {};
     switch (filter) {
       case TweetFilter[1]:
-        filtered = users.filter((u) => !following.includes(u.id));
+        filtered = users.filter((u) => !isFollowing(u.id));
         break;
       case TweetFilter[2]:
-        filtered = users.filter((u) => following.includes(u.id));
+        filtered = users.filter((u) => isFollowing(u.id));
         break;
       default:
         filtered = users;
@@ -80,24 +89,19 @@ export const Tweets = () => {
 
   const toggleFollowUser = (id) => {
     const user = { ...users.find((u) => u.id === id) };
-    if (following.includes(id)) {
-      user.followers -= 1;
-      setFollowing((u) => u.filter((f) => f !== id));
-    } else {
-      user.followers += 1;
-      setFollowing((u) => [...u, id]);
-    }
+    user.followers = isFollowing(id)? user.followers - 1 : user.followers + 1;
+    setFollowing((u) => isFollowing(id)? u.filter((f) => f !== id) : [...u, id]);
     updateUser(user);
   };
 
   return (
     <div className="wrapper">
-      <TweetsHeader filter={TweetFilter} onFilter={handleFilter} />
+      <TweetsHeader filter={TweetFilter} onFilter={setFilter} />
       {!isError ? (
         <>
         <ul className="userlist">
           {filteredTweets().length > 0 ? (
-            filteredTweets().map((u) => (
+            filteredTweets().map((u, index) => ((index < page * Step || filter === '') &&
               <li key={u.id}>
                 <UserCard
                   user={u}
@@ -105,7 +109,8 @@ export const Tweets = () => {
                   isFollowing={following.includes(u.id)}
                 />
               </li>
-            ))
+              )
+            )
           ) : (
             <Alert severity="error">Nothing to show</Alert>
           )}
@@ -114,7 +119,7 @@ export const Tweets = () => {
 
       <button
         type="button"
-        onClick={handleLoadMore}
+        onClick={() => setPage((p) => p + 1)}
         className={clsx("mainBtn", { loading: loading })}
         disabled={loading}
       >
