@@ -5,28 +5,31 @@ import Select from '@mui/material/Select';
 import './tweetsheader.scss';
 import { useState } from "react";
 
-export const TweetsHeader = ({filter, onFilter}) => {
-    const [showMode, setShowMode] = useState('')
+export const TweetsHeader = ({onFilter}) => {
+    const [showMode, setShowMode] = useState('Show All')
+
     const handleChange = (e) => {
         setShowMode(e.target.value);
         onFilter(e.target.value);
     }
+    
     return(
     <div className="tweetsheader">
-        <h2>Tweets</h2>
-        <FormControl  sx={{ m: 1, minWidth: 130 }} size="small">
+        <Link to='/' className="linkBtn">Back</Link>
+        <FormControl  sx={{ m: 1, width:150, minWidth: 100 }} size="small">
         <Select
           id="demo-simple-select-standard"
           value={showMode}
           onChange={handleChange}
         >
-            <MenuItem value=""><em>None</em></MenuItem>
-            {filter.map(f => (
+            <MenuItem value="Show All">Show All</MenuItem>
+            <MenuItem value="Follow">Follow</MenuItem>
+            <MenuItem value="Followings">Followings</MenuItem>
+{/*             {filter.map(f => (
                 <MenuItem value={f} key={f}>{f}</MenuItem>
-            ))}
+            ))} */}
         </Select>
-      </FormControl>
-        <Link to='/' className="mainBtn">Back</Link>
+      </FormControl> 
     </div>
     )
 }

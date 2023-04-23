@@ -2,16 +2,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://6429521bebb1476fcc46e108.mockapi.io/';
 
 
-export const getUsers = async (p, n) => {
-    try {
-        const users = await axios(`/tweeter-users?page=${p}&limit=${n}`);
-        return users;
-    } catch (err) {
-        throw new Error("Loading error");
-    } 
-}
-
-export const getAllUsers = async () => {
+export const getUsers = async () => {
     try {
         const users = await axios('/tweeter-users');
         return users;
